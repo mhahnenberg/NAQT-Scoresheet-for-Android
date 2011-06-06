@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NAQT Scoresheet</string>
+    <string name="radio15">15</string>
+    <string name="radio10">10</string>
+    <string name="radio0">0</string>
+    <string name="radioneg5">-5</string>
+    <string name="teama">Team A</string>
+    <string name="teamb">Team B</string>
+    <string name="tossup1">Tossup 1</string>
+    <string name="zerozero">0 - 0</string>
+    <string name="prev">&lt;</string>
+    <string name="next">></string>
+    <string name="bonus1">1</string>
+    <string name="bonus2">2</string>
+    <string name="bonus3">3</string>
+    <string name="addplayer">Add Player</string>
+    <string name="removeplayer">Remove Player</string>
+    <string name="newgame">New Game</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="blank"></string>
+    <string name="selectplayer">Select Player</string>
+    <string name="setname">Set Name</string>
+    <string name="stats">Stats</string>
+    <string name="dividerbackground">#FF909090</string>
+    <string name="score">Score</string>
+    <string name="ppb">PPB</string>
+    <string name="tossupsheard">TH</string>
+    <string name="ppt">PPT</string>
+    <string name="pp20th">PP20TH</string>
+    <string name="powers">Powers</string>
+    <string name="negs">Negs</string>
+</resources>

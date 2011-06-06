@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:stretchColumns="1"
+>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="16pt" android:gravity="center_horizontal" android:id="@+id/score" android:text="@string/zerozero"></TextView>
+    <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="wrap_content" android:gravity="center_horizontal" android:layout_marginRight="0px">
+        <TableLayout android:layout_height="wrap_content" android:id="@+id/tableLayout1" android:layout_marginRight="10px" android:layout_width="150dip">
+            <TableRow android:layout_height="wrap_content" android:id="@+id/tableRow4" android:layout_width="wrap_content" android:gravity="center_horizontal">
+                <TextView android:layout_width="wrap_content" android:text="@string/teama" android:id="@+id/teama" android:layout_height="wrap_content" android:gravity="center_horizontal"></TextView>
+            </TableRow>
+            <TableRow android:layout_height="wrap_content" android:id="@+id/tableRow2" android:layout_width="wrap_content" android:gravity="center_horizontal">
+                <RadioGroup android:layout_width="wrap_content" android:id="@+id/teamaradiogroup" android:layout_height="wrap_content">
+                    <RadioButton android:checked="true" android:text="@string/radio15" android:layout_height="wrap_content" android:id="@+id/teamaradio15" android:layout_width="wrap_content"></RadioButton>
+                    <RadioButton android:text="@string/radio10" android:layout_height="wrap_content" android:id="@+id/teamaradio10" android:layout_width="wrap_content"></RadioButton>
+                    <RadioButton android:text="@string/radio0" android:layout_height="wrap_content" android:id="@+id/teamaradio0" android:layout_width="wrap_content" android:checked="true"></RadioButton>
+                    <RadioButton android:text="@string/radioneg5" android:layout_height="wrap_content" android:id="@+id/teamaradioneg5" android:layout_width="wrap_content"></RadioButton>
+                </RadioGroup>
+            </TableRow>
+            <Spinner android:prompt="@string/selectplayer" android:layout_height="wrap_content" android:gravity="center_horizontal" android:spinnerMode="dialog" android:layout_width="80dip" android:id="@+id/teamaplayerspinner"></Spinner>
+        </TableLayout>
+        <TableLayout android:id="@+id/tableLayout2" android:layout_height="wrap_content" android:gravity="center_horizontal" android:layout_width="150dip">
+            <TableRow android:layout_height="wrap_content" android:id="@+id/tableRow5" android:layout_width="wrap_content" android:gravity="center_vertical|center_horizontal">
+                <TextView android:layout_width="wrap_content" android:text="@string/teamb" android:id="@+id/teamb" android:layout_height="wrap_content" android:gravity="center_horizontal"></TextView>
+            </TableRow>
+            <TableRow android:layout_height="wrap_content" android:id="@+id/tableRow3" android:layout_width="wrap_content" android:gravity="center_horizontal">
+                <RadioGroup android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/teambradiogroup">
+                    <RadioButton android:checked="true" android:text="@string/radio15" android:layout_height="wrap_content" android:id="@+id/teambradio15" android:layout_width="wrap_content"></RadioButton>
+                    <RadioButton android:text="@string/radio10" android:layout_height="wrap_content" android:id="@+id/teambradio10" android:layout_width="wrap_content"></RadioButton>
+                    <RadioButton android:text="@string/radio0" android:layout_height="wrap_content" android:id="@+id/teambradio0" android:layout_width="wrap_content" android:checked="true"></RadioButton>
+                    <RadioButton android:text="@string/radioneg5" android:layout_height="wrap_content" android:id="@+id/teambradioneg5" android:layout_width="wrap_content"></RadioButton>
+                </RadioGroup>
+            </TableRow>
+            <Spinner android:layout_height="wrap_content" android:layout_width="80dip" android:id="@+id/teambplayerspinner" android:prompt="@string/selectplayer"></Spinner>
+        </TableLayout>
+    </LinearLayout>
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/linearLayout4" android:layout_marginLeft="0px" android:gravity="center_horizontal">
+    </LinearLayout>
+    <LinearLayout android:gravity="center_horizontal" android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/linearLayout3">
+        <CheckBox android:layout_height="wrap_content" android:text="@string/bonus1" android:layout_width="wrap_content" android:id="@+id/bonuscheck1" android:layout_marginRight="40px" android:enabled="false"></CheckBox>
+        <CheckBox android:layout_height="wrap_content" android:text="@string/bonus2" android:layout_width="wrap_content" android:id="@+id/bonuscheck2" android:layout_marginRight="40px" android:enabled="false"></CheckBox>
+        <CheckBox android:layout_height="wrap_content" android:text="@string/bonus3" android:layout_width="wrap_content" android:id="@+id/bonuscheck3" android:enabled="false"></CheckBox>
+    </LinearLayout>
+    <TextView android:textSize="10pt" android:layout_height="wrap_content" android:id="@+id/tossupnum" android:layout_width="wrap_content" android:gravity="center_horizontal" android:text="@string/tossup1" android:layout_marginTop="0px"></TextView>
+    <TableRow android:layout_height="wrap_content" android:id="@+id/tableRow6" android:gravity="center_horizontal" android:layout_width="wrap_content" android:layout_marginTop="0px">
+        <LinearLayout android:id="@+id/linearLayout1" android:layout_width="match_parent" android:layout_height="match_parent" android:gravity="center|center_horizontal">
+            <Button android:layout_height="wrap_content" android:id="@+id/backbutton" android:layout_width="wrap_content" android:text="@string/prev" android:paddingLeft="15px" android:paddingRight="15px" android:layout_marginRight="75px" android:width="75px"></Button>
+            <Button android:layout_height="wrap_content" android:id="@+id/forwardbutton" android:layout_width="wrap_content" android:text="@string/next" android:paddingLeft="15px" android:paddingRight="15px" android:width="75px"></Button>
+        </LinearLayout>
+    </TableRow>
+	
+
+</TableLayout>

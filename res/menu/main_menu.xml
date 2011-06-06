@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    
+    
+    <group android:id="@+id/group1">
+    	<item android:titleCondensed="@string/addplayer" android:title="@string/addplayer" android:id="@+id/addplayer" android:icon="@drawable/ic_menu_invite"></item>
+    	<item android:titleCondensed="@string/removeplayer" android:title="@string/removeplayer" android:id="@+id/removeplayer" android:icon="@drawable/ic_menu_blocked_user"></item>
+    	<item android:id="@+id/newgame" android:titleCondensed="@string/newgame" android:title="@string/newgame" android:icon="@android:drawable/ic_menu_add"></item>
+    	<item android:id="@+id/stats" android:titleCondensed="@string/stats" android:icon="@android:drawable/ic_menu_sort_by_size" android:title="@string/stats"></item>
+	</group>
+</menu>
