@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <TableLayout android:layout_height="match_parent" android:layout_width="wrap_content" android:id="@+id/tableLayout1" android:stretchColumns="1">
+        <TextView android:layout_width="wrap_content" android:id="@+id/textView1" android:text="@string/blank" android:layout_height="2dip" android:background="@color/dividerbgcolor" android:layout_marginTop="5dip"/>
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:orientation="vertical">
+            <TextView android:layout_height="wrap_content" android:text="@string/teama" android:layout_width="wrap_content" android:textSize="12pt" android:id="@+id/teamastatslabel"></TextView>
+        </LinearLayout>
+        <TextView android:layout_width="wrap_content" android:layout_height="2dip" android:id="@+id/TextView02" android:text="@string/blank" android:background="@color/dividerbgcolor"/>
+        <LinearLayout android:layout_width="wrap_content" android:orientation="vertical" android:layout_height="wrap_content" android:id="@+id/linearLayout3" android:layout_marginLeft="5dip">
+            <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout1">
+                <TextView android:gravity="left" android:layout_width="wrap_content" android:id="@+id/teamascore" android:text="@string/score" android:layout_height="wrap_content" android:layout_alignParentLeft="true"></TextView>
+                <TextView android:gravity="right" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentRight="true" android:text="@string/radio0" android:id="@+id/teamascorevalue" android:layout_marginRight="5dip"></TextView>
+            </RelativeLayout>
+            <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout2">
+                <TextView android:layout_height="wrap_content" android:id="@+id/teamapowers" android:text="@string/powers" android:layout_width="wrap_content" android:layout_alignParentLeft="true"></TextView>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/teamapowersvalue" android:layout_alignParentRight="true" android:text="@string/radio0" android:layout_marginRight="5dip"></TextView>
+            </RelativeLayout>
+            <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout3">
+                <TextView android:layout_height="wrap_content" android:id="@+id/teamanegs" android:text="@string/negs" android:layout_width="wrap_content" android:layout_alignParentLeft="true"></TextView>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/teamanegsvalue" android:layout_alignParentRight="true" android:text="@string/radio0" android:layout_marginRight="5dip"></TextView>
+            </RelativeLayout>
+            <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout4">
+                <TextView android:layout_height="wrap_content" android:id="@+id/teamappb" android:text="@string/ppb" android:layout_width="wrap_content" android:layout_alignParentLeft="true"></TextView>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/teamappbvalue" android:layout_alignParentRight="true" android:text="@string/radio0" android:layout_marginRight="5dip"></TextView>
+            </RelativeLayout>
+            <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout5">
+                <TextView android:layout_height="wrap_content" android:id="@+id/teamatossupsheard" android:text="@string/tossupsheard" android:layout_width="wrap_content" android:layout_alignParentLeft="true"></TextView>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/teamatossupsheardvalue" android:layout_alignParentRight="true" android:text="@string/radio0" android:layout_marginRight="5dip"></TextView>
+            </RelativeLayout>
+            <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout6">
+                <TextView android:layout_height="wrap_content" android:id="@+id/teamappt" android:text="@string/ppt" android:layout_width="wrap_content" android:layout_alignParentLeft="true"></TextView>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/teamapptvalue" android:layout_alignParentRight="true" android:text="@string/radio0" android:layout_marginRight="5dip"></TextView>
+            </RelativeLayout>
+            <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout7">
+                <TextView android:layout_height="wrap_content" android:id="@+id/teamapp20th" android:text="@string/pp20th" android:layout_width="wrap_content" android:layout_alignParentLeft="true"></TextView>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/teamapp20thvalue" android:layout_alignParentRight="true" android:text="@string/radio0" android:layout_marginRight="5dip"></TextView>
+            </RelativeLayout>
+        </LinearLayout>
+        <TextView android:layout_width="wrap_content" android:layout_height="2dip" android:id="@+id/TextView03" android:text="@string/blank" android:background="@color/dividerbgcolor"/>
+        <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout2" android:layout_width="wrap_content" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="12pt" android:id="@+id/teambstatslabel" android:text="@string/teamb"/>
+        </LinearLayout>
+        <TextView android:layout_width="wrap_content" android:layout_height="2dip" android:id="@+id/TextView01" android:text="@string/blank" android:background="@color/dividerbgcolor"></TextView>
+        <LinearLayout android:layout_height="wrap_content" android:orientation="vertical" android:layout_width="wrap_content" android:id="@+id/LinearLayout04" android:layout_marginLeft="5dip">
+            <RelativeLayout android:id="@+id/relativeLayout8" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/teambscore" android:text="@string/score" android:layout_alignParentLeft="true"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/teambscorevalue" android:layout_alignParentRight="true" android:text="@string/radio0" android:layout_marginRight="5dip"></TextView>
+            </RelativeLayout>
+            <RelativeLayout android:id="@+id/relativeLayout9" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/teambpowers" android:text="@string/powers" android:layout_alignParentLeft="true"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/teambpowersvalue" android:layout_alignParentRight="true" android:text="@string/radio0" android:layout_marginRight="5dip"></TextView>
+            </RelativeLayout>
+            <RelativeLayout android:id="@+id/relativeLayout10" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/teambnegs" android:text="@string/negs" android:layout_alignParentLeft="true"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/teambnegsvalue" android:layout_alignParentRight="true" android:text="@string/radio0" android:layout_marginRight="5dip"></TextView>
+            </RelativeLayout>
+            <RelativeLayout android:id="@+id/relativeLayout11" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/teambppb" android:text="@string/ppb" android:layout_alignParentLeft="true"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/teambppbvalue" android:layout_alignParentRight="true" android:text="@string/radio0" android:layout_marginRight="5dip"></TextView>
+            </RelativeLayout>
+            <RelativeLayout android:id="@+id/relativeLayout12" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/teambtossupsheard" android:text="@string/tossupsheard" android:layout_alignParentLeft="true"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/teambtossupsheardvalue" android:layout_alignParentRight="true" android:text="@string/radio0" android:layout_marginRight="5dip"></TextView>
+            </RelativeLayout>
+            <RelativeLayout android:id="@+id/relativeLayout13" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/teambppt" android:text="@string/ppt" android:layout_alignParentLeft="true"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/teambpptvalue" android:layout_alignParentRight="true" android:text="@string/radio0" android:layout_marginRight="5dip"></TextView>
+            </RelativeLayout>
+            <RelativeLayout android:id="@+id/relativeLayout14" android:layout_width="match_parent" android:layout_height="wrap_content">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/teambpp20th" android:text="@string/pp20th" android:layout_alignParentLeft="true"></TextView>
+                <TextView android:layout_height="wrap_content" android:layout_width="wrap_content" android:id="@+id/teambpp20thvalue" android:layout_alignParentRight="true" android:text="@string/radio0" android:layout_marginRight="5dip"></TextView>
+            </RelativeLayout>
+        </LinearLayout>
+    </TableLayout>
+</LinearLayout>

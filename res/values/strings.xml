@@ -23,7 +23,7 @@
     <string name="selectplayer">Select Player</string>
     <string name="setname">Set Name</string>
     <string name="stats">Stats</string>
-    <string name="dividerbackground">#FF909090</string>
+    <string name="dividerbackground">#FF9090</string>
     <string name="score">Score</string>
     <string name="ppb">PPB</string>
     <string name="tossupsheard">TH</string>
@@ -31,4 +31,8 @@
     <string name="pp20th">PP20TH</string>
     <string name="powers">Powers</string>
     <string name="negs">Negs</string>
+    <string name="name">Name</string>
+    <string name="points">Points</string>
+    <string name="ppg">PPG</string>
+    <string name="tens">10s</string>
 </resources>

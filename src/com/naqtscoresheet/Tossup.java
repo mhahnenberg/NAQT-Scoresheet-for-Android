@@ -1,11 +1,13 @@
 package com.naqtscoresheet;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Tossup {
+public class Tossup implements Serializable {
+	private static final long serialVersionUID = -7974143477552157831L;
 	private final int winnerPoints;
 	private final int loserPoints;
 	private final Team winnerTeam;
@@ -15,14 +17,23 @@ public class Tossup {
 	private Bonus bonus;
 	private final List<Player> aPlayersHeard;
 	private final List<Player> bPlayersHeard;
+	
+	// used to get around serialization issues
+	private static class BogusPlayer extends Player {
+		private static final long serialVersionUID = 8448594428406499460L;
+
+		public BogusPlayer(String name) {
+			super(name);
+		}
+	}
 
 	public Tossup(Team winnerTeam, int winnerPoints, Team loserTeam, int loserPoints) {
 		this.winnerPoints = winnerPoints;
 		this.loserPoints = loserPoints;
 		this.winnerTeam = winnerTeam;
 		this.loserTeam = loserTeam;
-		this.winnerPlayer = null;
-		this.loserPlayer = null;
+		this.winnerPlayer = new BogusPlayer("");
+		this.loserPlayer = new BogusPlayer("");
 		this.aPlayersHeard = new ArrayList<Player>();
 		this.bPlayersHeard = new ArrayList<Player>();
 		if (winnerTeam.getName().equals(NAQTScoresheet.teamAName)) {
@@ -61,6 +72,9 @@ public class Tossup {
 	}
 	
 	public Player getWinnerPlayer() {
+		if (this.winnerPlayer instanceof BogusPlayer) {
+			return null;
+		}
 		return this.winnerPlayer;
 	}
 	
@@ -69,6 +83,9 @@ public class Tossup {
 	}
 	
 	public Player getLoserPlayer() {
+		if (this.loserPlayer instanceof BogusPlayer) {
+			return null;
+		}
 		return this.loserPlayer;
 	}
 	

@@ -1,9 +1,11 @@
 package com.naqtscoresheet;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game {
+public class Game implements Serializable {
+	private static final long serialVersionUID = 4152277972389886782L;
 	private int currTossupNum;
 	private final int maxTossups;
 	private final List<Tossup> tossups;
@@ -113,5 +115,36 @@ public class Game {
 		
 		t.getWinnerTeam().subPoints(oldBonus.getPoints());
 		t.getWinnerTeam().addPoints(b.getPoints());
+	}
+	
+	// returns the number of the highest tossup which has been created, but may not have been completed
+	private int getHighestTossupNum() {
+		if (this.tossups.size() == this.maxTossups) {
+			return this.maxTossups + this.tiebreakers.size();
+		}
+		else {
+			return this.tossups.size();
+		}
+	}
+	
+	// returns the highest tossup which has been created, but may not have been completed
+	private Tossup getHighestTossup() {
+		int highestTossupNum = this.getHighestTossupNum();
+		if (highestTossupNum > this.maxTossups) {
+			return this.tiebreakers.get(highestTossupNum - this.maxTossups - 1);
+		}
+		else {
+			return this.tossups.get(highestTossupNum - 1);
+		}
+	}
+	
+	public int tossupsHeard() {
+		Tossup highestTossup = this.getHighestTossup();
+		if (highestTossup.getWinnerPoints() > 0 || highestTossup.getLoserPoints() < 0) {
+			return this.tossups.size() + this.tiebreakers.size();
+		}
+		else {
+			return this.tossups.size() + this.tiebreakers.size() - 1;
+		}
 	}
 }

@@ -1,8 +1,10 @@
 package com.naqtscoresheet;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Bonus {
+public class Bonus implements Serializable {
+	private static final long serialVersionUID = 2029769330695269039L;
 	private final int points;
 	private final List<Boolean> parts;
 	public Bonus(int points, List<Boolean> parts) {

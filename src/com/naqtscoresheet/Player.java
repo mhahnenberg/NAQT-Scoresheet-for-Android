@@ -1,6 +1,9 @@
 package com.naqtscoresheet;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
+	private static final long serialVersionUID = -1191776898623429448L;
 	private final String name;
 	public Player(String name) {
 		this.name = name;
@@ -16,5 +19,9 @@ public class Player {
 	
 	public int hashCode() {
 		return this.name.hashCode();
+	}
+	
+	public String toString() {
+		return this.name;
 	}
 }

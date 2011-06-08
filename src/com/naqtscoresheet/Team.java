@@ -1,10 +1,12 @@
 package com.naqtscoresheet;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Team {
+public class Team implements Serializable {
+	private static final long serialVersionUID = 6446404867455448712L;
 	private String name;
 	private int score;
 	private final List<Player> currPlayers;
@@ -64,5 +66,9 @@ public class Team {
 	
 	public List<Player> getPlayers() {
 		return Collections.unmodifiableList(this.currPlayers);
+	}
+	
+	public String toString() {
+		return this.name;
 	}
 }

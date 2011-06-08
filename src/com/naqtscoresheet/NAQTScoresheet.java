@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -281,8 +282,34 @@ public class NAQTScoresheet extends Activity {
 			}
 			Tossup t = game.currTossup();
 			String playerName = (String)adapter.getSelectedItem();
-			Player p = t.getWinnerTeam().getPlayer(playerName);
-			t.setWinnerPlayer(p);
+			
+			// team a was selected
+			if (adapter.getId() == R.id.teamaplayerspinner) {
+				// team a won
+				if (t.getWinnerTeam().equals(game.getTeamA())) {
+					Player p = t.getWinnerTeam().getPlayer(playerName);
+					t.setWinnerPlayer(p);
+				}
+				// team a lost
+				else {
+					Player p = t.getLoserTeam().getPlayer(playerName);
+					t.setLoserPlayer(p);
+				}
+			}
+			// team b was selected
+			else {
+				// team b won
+				if (t.getWinnerTeam().equals(game.getTeamB())) {
+					Player p = t.getWinnerTeam().getPlayer(playerName);
+					t.setWinnerPlayer(p);
+				}
+				// team b lost
+				else {
+					Player p = t.getLoserTeam().getPlayer(playerName);
+					t.setLoserPlayer(p);
+				}
+			}
+			
 		}
 
 		@Override
@@ -499,6 +526,7 @@ public class NAQTScoresheet extends Activity {
 					teamAName = teamName;
 					parentDialog.dismiss();
 					NAQTScoresheet.this.removeDialog(TEAM_A_NAME_DIALOG);
+					game.getTeamA().setName(teamAName);
 				}
 			});
 			break;
@@ -518,6 +546,7 @@ public class NAQTScoresheet extends Activity {
 					TextView tv = (TextView)NAQTScoresheet.this.findViewById(R.id.teamb);
 					tv.setText(teamName);
 					teamBName = teamName;
+					game.getTeamB().setName(teamBName);
 					parentDialog.dismiss();
 					NAQTScoresheet.this.removeDialog(TEAM_B_NAME_DIALOG);
 				}
@@ -610,8 +639,10 @@ public class NAQTScoresheet extends Activity {
 		bbox2.setOnCheckedChangeListener(bonusBoxChecked);
 		bbox3.setOnCheckedChangeListener(bonusBoxChecked);
 		
-		Spinner spinner = (Spinner)findViewById(R.id.teamaplayerspinner);
-		spinner.setOnItemSelectedListener(playerSpinnerSelected);
+		Spinner spinnerA = (Spinner)findViewById(R.id.teamaplayerspinner);
+		spinnerA.setOnItemSelectedListener(playerSpinnerSelected);
+		Spinner spinnerB = (Spinner)findViewById(R.id.teambplayerspinner);
+		spinnerB.setOnItemSelectedListener(playerSpinnerSelected);
 		this.updatePlayerSpinner();
 		
 		TextView teamAName = (TextView)findViewById(R.id.teama);
@@ -638,6 +669,13 @@ public class NAQTScoresheet extends Activity {
     		return true;
     	case R.id.newgame:
     		showDialog(NEW_GAME_DIALOG);
+    		return true;
+    	case R.id.stats:
+    		Intent intent = new Intent(NAQTScoresheet.this, PlayerStatsScreen.class);
+    		Bundle bundle = new Bundle();
+    		bundle.putSerializable("game", this.game);
+    		intent.putExtras(bundle);
+    		startActivity(intent);
     		return true;
     	default:
     		return super.onOptionsItemSelected(item);
