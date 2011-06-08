@@ -14,6 +14,7 @@
         </activity>
         <activity android:name="TeamStatsScreen" android:theme="@android:style/Theme.Black.NoTitleBar"></activity>
         <activity android:name="PlayerStatsScreen" android:theme="@android:style/Theme.Black.NoTitleBar"></activity>
+        <activity android:theme="@android:style/Theme.Black.NoTitleBar" android:name="StatsScreen"></activity>
 
     </application>
 </manifest>

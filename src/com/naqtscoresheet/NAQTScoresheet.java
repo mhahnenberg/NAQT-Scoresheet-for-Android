@@ -671,7 +671,7 @@ public class NAQTScoresheet extends Activity {
     		showDialog(NEW_GAME_DIALOG);
     		return true;
     	case R.id.stats:
-    		Intent intent = new Intent(NAQTScoresheet.this, PlayerStatsScreen.class);
+    		Intent intent = new Intent(NAQTScoresheet.this, StatsScreen.class);
     		Bundle bundle = new Bundle();
     		bundle.putSerializable("game", this.game);
     		intent.putExtras(bundle);
