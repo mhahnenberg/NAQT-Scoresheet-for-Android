@@ -48,19 +48,20 @@ public class TeamStatsScreen extends Activity {
 	private double getPointsPerBonus(Team team) {
 		Tossup currTossup = game.getNthTossup(1);
 		int i = 1;
+		int bonusesHeard = 0;
 		double totalBonusPoints = 0.0;
 		while (currTossup != null) {
 			if (currTossup.getWinnerTeam().equals(team)) {
 				totalBonusPoints += currTossup.getBonus().getPoints();
+				bonusesHeard += 1;
 			}
 			i += 1;
 			currTossup = game.getNthTossup(i);
 		}
-		double tossupsHeard = this.game.tossupsHeard();
-		if (this.game.tossupsHeard() == 0) {
+		if (bonusesHeard == 0) {
 			return 0.0;
 		}
-		return totalBonusPoints / tossupsHeard;
+		return totalBonusPoints / (double)bonusesHeard;
 	}
 	
 	private double roundToNPlaces(double d, int n) {
