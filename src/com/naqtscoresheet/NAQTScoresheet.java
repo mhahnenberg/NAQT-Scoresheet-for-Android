@@ -1,6 +1,14 @@
 package com.naqtscoresheet;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import com.naqtscoresheet.R;
@@ -8,6 +16,7 @@ import com.naqtscoresheet.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +37,7 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class NAQTScoresheet extends Activity {
 	private static final int MAX_TOSSUPS = 24;
@@ -40,6 +50,8 @@ public class NAQTScoresheet extends Activity {
 	private static final int CHOOSE_TEAM_B_PLAYERS_DIALOG = 5;
 	private static final int TEAM_A_NAME_DIALOG = 8;
 	private static final int TEAM_B_NAME_DIALOG = 9;
+	private static final int LOAD_GAME_DIALOG = 10;
+	public static final int LOAD_GAME_RESULT = 0;
 	private Game game;
 	public static String teamAName = "Team A";
 	public static String teamBName = "Team B";
@@ -245,12 +257,13 @@ public class NAQTScoresheet extends Activity {
 				disableBonusBoxes();
 			}
 			
+			Tossup oldTossup = game.currTossup();
 			Tossup t;
 			if (aPoints >= bPoints) {
-				t = new Tossup(game.getTeamA(), aPoints, game.getTeamB(), bPoints);
+				t = new Tossup(game.getCurrTossupNum(), game.getTeamA(), aPoints, game.getTeamB(), bPoints, oldTossup.isTiebreaker());
 			}
 			else {
-				t = new Tossup(game.getTeamB(), bPoints, game.getTeamA(), aPoints);
+				t = new Tossup(game.getCurrTossupNum(), game.getTeamB(), bPoints, game.getTeamA(), aPoints, oldTossup.isTiebreaker());
 			}
 			game.updateCurrTossup(t);
 			updateGlobalScore();
@@ -432,6 +445,23 @@ public class NAQTScoresheet extends Activity {
     		       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
     		           public void onClick(DialogInterface dialog, int id) {
     		                NAQTScoresheet.this.startNewGame();
+    		           }
+    		       })
+    		       .setNegativeButton("No", new DialogInterface.OnClickListener() {
+    		           public void onClick(DialogInterface dialog, int id) {
+    		                dialog.cancel();
+    		           }
+    		       });
+    		dialog = alertBuilder.create();
+    		break;
+		case LOAD_GAME_DIALOG:
+			alertBuilder = new AlertDialog.Builder(this);
+			alertBuilder.setMessage("Are you sure you want to leave this game?")
+    		       .setCancelable(false)
+    		       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+    		           public void onClick(DialogInterface dialog, int id) {
+    		        	   Intent intent = new Intent(NAQTScoresheet.this, LoadGameScreen.class);
+    		        	   startActivityForResult(intent, LOAD_GAME_RESULT);
     		           }
     		       })
     		       .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -677,8 +707,81 @@ public class NAQTScoresheet extends Activity {
     		intent.putExtras(bundle);
     		startActivity(intent);
     		return true;
+    	case R.id.savegame:
+    		this.saveGame();
+    		return true;
+    	case R.id.loadgame:
+    		showDialog(LOAD_GAME_DIALOG);
+    		return true;
     	default:
     		return super.onOptionsItemSelected(item);
     	}
     }
+
+	private void saveGame() {
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd - HH:mm");
+		String filename = sdf.format(now) +  " - " + 
+			this.game.getTeamA().getName() + " vs " + this.game.getTeamB().getName();
+		Toast t;
+		
+		try {
+			FileOutputStream fos = openFileOutput(filename, Context.MODE_PRIVATE);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(this.game);
+			t = Toast.makeText(this, "Game saved!", Toast.LENGTH_SHORT);
+			oos.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			t = Toast.makeText(this, "Error saving game!", Toast.LENGTH_SHORT);
+		} catch (IOException e) {
+			e.printStackTrace();
+			t = Toast.makeText(this, "Error saving game!", Toast.LENGTH_SHORT);
+		}
+		
+		t.show();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// user cancelled out of list
+		if (data == null) {
+			return;
+		}
+		switch(requestCode) {
+		case LOAD_GAME_RESULT:
+			String filename = data.getStringExtra("filename");
+			try {
+				ObjectInputStream ois = new ObjectInputStream(openFileInput(filename));
+				Game newGame = (Game)ois.readObject();
+				ois.close();
+				if (newGame == null) {
+					break;
+				}
+				this.game = newGame;
+				Tossup currTossup = this.game.currTossup();
+				this.updateBonusBoxes(currTossup);
+				this.updatePointsSelector(currTossup);
+				this.updateGlobalScore();
+				this.updateTossupNum();
+				this.updatePlayerSpinner();
+			} catch (StreamCorruptedException e) {
+				e.printStackTrace();
+				throw new RuntimeException();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				throw new RuntimeException();
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				throw new RuntimeException();
+			}
+			break;
+		default:
+			super.onActivityResult(requestCode, resultCode, data);
+			break;
+		}
+	}
 }

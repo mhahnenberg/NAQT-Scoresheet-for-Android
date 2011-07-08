@@ -6,7 +6,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Tossup implements Serializable {
+import com.naqtscoresheet.dom.DOMNode;
+
+public class Tossup implements Serializable, DOMNode {
 	private static final long serialVersionUID = -7974143477552157831L;
 	private final int winnerPoints;
 	private final int loserPoints;
@@ -17,6 +19,8 @@ public class Tossup implements Serializable {
 	private Bonus bonus;
 	private final List<Player> aPlayersHeard;
 	private final List<Player> bPlayersHeard;
+	private final int tossupNum;
+	private final boolean isTiebreaker;
 	
 	// used to get around serialization issues
 	private static class BogusPlayer extends Player {
@@ -27,7 +31,8 @@ public class Tossup implements Serializable {
 		}
 	}
 
-	public Tossup(Team winnerTeam, int winnerPoints, Team loserTeam, int loserPoints) {
+	public Tossup(int tossupNum, Team winnerTeam, int winnerPoints, Team loserTeam, int loserPoints, boolean isTiebreaker) {
+		this.tossupNum = tossupNum;
 		this.winnerPoints = winnerPoints;
 		this.loserPoints = loserPoints;
 		this.winnerTeam = winnerTeam;
@@ -45,6 +50,7 @@ public class Tossup implements Serializable {
 			this.aPlayersHeard.addAll(loserTeam.getPlayers());
 		}
 		this.bonus = new Bonus(0, Arrays.asList(false, false, false));
+		this.isTiebreaker = isTiebreaker;
 	}
 	
 	public int getWinnerPoints() {
@@ -129,5 +135,30 @@ public class Tossup implements Serializable {
 		else {
 			return Collections.unmodifiableList(this.bPlayersHeard);
 		}
+	}
+	
+	public boolean isTiebreaker() {
+		return this.isTiebreaker;
+	}
+
+	@Override
+	public void outputXML(StringBuilder input) {
+		input.append("<tossup num=\"" + this.tossupNum + "\">\n");
+		input.append("<winner>\n");
+		input.append("<points>" + this.winnerPoints + "</points>\n");
+		this.winnerTeam.outputXML(input);
+		this.winnerPlayer.outputXML(input);
+		input.append("</winner>\n");
+		input.append("<loser>\n");
+		input.append("<points>" + this.loserPoints + "</points>\n");
+		this.loserTeam.outputXML(input);
+		if (this.loserPlayer != null) {
+			this.loserPlayer.outputXML(input);
+		}
+		input.append("</loser>\n");
+		if (this.bonus != null) {
+			this.bonus.outputXML(input);
+		}
+		input.append("</tossup>\n");
 	}
 }

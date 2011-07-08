@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game implements Serializable {
+import com.naqtscoresheet.dom.DOMNode;
+
+public class Game implements Serializable, DOMNode {
 	private static final long serialVersionUID = 4152277972389886782L;
 	private int currTossupNum;
 	private final int maxTossups;
@@ -21,7 +23,7 @@ public class Game implements Serializable {
 		this.teamA = teamA;
 		this.teamB = teamB;
 		
-		this.tossups.add(new Tossup(this.teamA, 0, this.teamB, 0));
+		this.tossups.add(new Tossup(1, this.teamA, 0, this.teamB, 0, false));
 	}
 	
 	public Team getTeamA() {
@@ -36,14 +38,14 @@ public class Game implements Serializable {
 		if (this.currTossupNum + 1 <= maxTossups) {
 			this.currTossupNum += 1;
 			if (this.tossups.size() < this.currTossupNum) {
-				this.tossups.add(new Tossup(this.teamA, 0, this.teamB, 0));
+				this.tossups.add(new Tossup(this.currTossupNum, this.teamA, 0, this.teamB, 0, false));
 			}
 			return this.tossups.get(currTossupNum-1);
 		}
 		else {
 			this.currTossupNum += 1;
 			if (this.tiebreakers.size() < this.currTossupNum - this.maxTossups) {
-				this.tiebreakers.add(new Tossup(this.teamA, 0, this.teamB, 0));
+				this.tiebreakers.add(new Tossup(this.currTossupNum, this.teamA, 0, this.teamB, 0, true));
 			}
 			return this.tiebreakers.get(this.currTossupNum - this.maxTossups - 1);
 		}
@@ -146,5 +148,34 @@ public class Game implements Serializable {
 		else {
 			return this.tossups.size() + this.tiebreakers.size() - 1;
 		}
+	}
+
+	@Override
+	public void outputXML(StringBuilder input) {
+		// TODO Auto-generated method stub
+		input.append("<game>\n");
+		input.append("<teams>\n");
+		input.append("<teama name=\"" + this.teamA.getName() + "\">\n");
+		for (Player p : this.teamA.getPlayers()) {
+			p.outputXML(input);
+		}
+		input.append("</teama>\n");
+		input.append("<teamb name=\"" + this.teamB.getName() + "\">\n");
+		for (Player p : this.teamB.getPlayers()) {
+			p.outputXML(input);
+		}
+		input.append("</teamb>\n");
+		input.append("</teams>\n");
+		input.append("<tossups>\n");
+		for (Tossup t : this.tossups) {
+			t.outputXML(input);
+		}
+		input.append("</tossups>\n");
+		input.append("<tiebreakers>\n");
+		for (Tossup t : this.tiebreakers) {
+			t.outputXML(input);
+		}
+		input.append("</tiebreakers>\n");
+		input.append("</game>\n");
 	}
 }

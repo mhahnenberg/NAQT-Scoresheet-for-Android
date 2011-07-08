@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Team implements Serializable {
+import com.naqtscoresheet.dom.DOMNode;
+
+public class Team implements Serializable, DOMNode {
 	private static final long serialVersionUID = 6446404867455448712L;
 	private String name;
 	private int score;
@@ -70,5 +72,13 @@ public class Team implements Serializable {
 	
 	public String toString() {
 		return this.name;
+	}
+
+	@Override
+	public void outputXML(StringBuilder input) {
+		// TODO Auto-generated method stub
+		input.append("<team>");
+		input.append(this.name);
+		input.append("</team>\n");
 	}
 }

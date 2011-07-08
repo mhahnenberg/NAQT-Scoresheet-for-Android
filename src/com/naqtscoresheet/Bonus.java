@@ -3,7 +3,9 @@ package com.naqtscoresheet;
 import java.io.Serializable;
 import java.util.List;
 
-public class Bonus implements Serializable {
+import com.naqtscoresheet.dom.DOMNode;
+
+public class Bonus implements Serializable, DOMNode {
 	private static final long serialVersionUID = 2029769330695269039L;
 	private final int points;
 	private final List<Boolean> parts;
@@ -18,5 +20,13 @@ public class Bonus implements Serializable {
 	
 	public boolean isPartCorrect(int partNum) {
 		return this.parts.get(partNum-1);
+	}
+
+	@Override
+	public void outputXML(StringBuilder input) {
+		// TODO Auto-generated method stub
+		input.append("<bonus>");
+		input.append(this.points);
+		input.append("</bonus>\n");
 	}
 }

@@ -2,7 +2,9 @@ package com.naqtscoresheet;
 
 import java.io.Serializable;
 
-public class Player implements Serializable {
+import com.naqtscoresheet.dom.DOMNode;
+
+public class Player implements Serializable, DOMNode {
 	private static final long serialVersionUID = -1191776898623429448L;
 	private final String name;
 	public Player(String name) {
@@ -23,5 +25,12 @@ public class Player implements Serializable {
 	
 	public String toString() {
 		return this.name;
+	}
+
+	@Override
+	public void outputXML(StringBuilder input) {
+		input.append("<player>");
+		input.append(this.name);
+		input.append("</player>\n");
 	}
 }

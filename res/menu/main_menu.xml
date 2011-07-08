@@ -4,10 +4,12 @@
     
     
     
-    <group android:id="@+id/group1">
+    <group android:id="@+id/main_group">
     	<item android:titleCondensed="@string/addplayer" android:title="@string/addplayer" android:id="@+id/addplayer" android:icon="@drawable/ic_menu_invite"></item>
-    	<item android:titleCondensed="@string/removeplayer" android:title="@string/removeplayer" android:id="@+id/removeplayer" android:icon="@drawable/ic_menu_blocked_user"></item>
+    	<item android:titleCondensed="@string/removeplayer" android:title="@string/removeplayer" android:id="@+id/removeplayer" android:icon="@android:drawable/ic_menu_delete"></item>
     	<item android:id="@+id/newgame" android:titleCondensed="@string/newgame" android:title="@string/newgame" android:icon="@android:drawable/ic_menu_add"></item>
-    	<item android:id="@+id/stats" android:titleCondensed="@string/stats" android:icon="@android:drawable/ic_menu_sort_by_size" android:title="@string/stats"></item>
+    	<item android:id="@+id/stats" android:icon="@android:drawable/ic_menu_sort_by_size" android:title="@string/stats" android:titleCondensed="@string/stats"></item><item android:title="Save Game" android:id="@+id/savegame" android:titleCondensed="Save Game" android:icon="@android:drawable/ic_menu_save"></item>
+    	
+    	<item android:id="@+id/loadgame" android:title="Load Game" android:titleCondensed="Load Game" android:icon="@drawable/ic_menu_archive"></item>
 	</group>
 </menu>
