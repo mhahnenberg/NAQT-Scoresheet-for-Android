@@ -1,3 +1,18 @@
+/*
+ * Copyright 2011 Mark Hahnenberg
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.naqtscoresheet;
 
 import java.io.Serializable;
@@ -6,9 +21,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.naqtscoresheet.dom.DOMNode;
-
-public class Tossup implements Serializable, DOMNode {
+public class Tossup implements Serializable {
 	private static final long serialVersionUID = -7974143477552157831L;
 	private final int winnerPoints;
 	private final int loserPoints;
@@ -51,6 +64,10 @@ public class Tossup implements Serializable, DOMNode {
 		}
 		this.bonus = new Bonus(0, Arrays.asList(false, false, false));
 		this.isTiebreaker = isTiebreaker;
+	}
+	
+	public int getTossupNum() {
+		return this.tossupNum;
 	}
 	
 	public int getWinnerPoints() {
@@ -139,26 +156,5 @@ public class Tossup implements Serializable, DOMNode {
 	
 	public boolean isTiebreaker() {
 		return this.isTiebreaker;
-	}
-
-	@Override
-	public void outputXML(StringBuilder input) {
-		input.append("<tossup num=\"" + this.tossupNum + "\">\n");
-		input.append("<winner>\n");
-		input.append("<points>" + this.winnerPoints + "</points>\n");
-		this.winnerTeam.outputXML(input);
-		this.winnerPlayer.outputXML(input);
-		input.append("</winner>\n");
-		input.append("<loser>\n");
-		input.append("<points>" + this.loserPoints + "</points>\n");
-		this.loserTeam.outputXML(input);
-		if (this.loserPlayer != null) {
-			this.loserPlayer.outputXML(input);
-		}
-		input.append("</loser>\n");
-		if (this.bonus != null) {
-			this.bonus.outputXML(input);
-		}
-		input.append("</tossup>\n");
 	}
 }

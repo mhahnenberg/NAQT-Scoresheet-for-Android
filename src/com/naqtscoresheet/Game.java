@@ -1,12 +1,25 @@
+/*
+ * Copyright 2011 Mark Hahnenberg
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.naqtscoresheet;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.naqtscoresheet.dom.DOMNode;
-
-public class Game implements Serializable, DOMNode {
+public class Game implements Serializable {
 	private static final long serialVersionUID = 4152277972389886782L;
 	private int currTossupNum;
 	private final int maxTossups;
@@ -148,34 +161,5 @@ public class Game implements Serializable, DOMNode {
 		else {
 			return this.tossups.size() + this.tiebreakers.size() - 1;
 		}
-	}
-
-	@Override
-	public void outputXML(StringBuilder input) {
-		// TODO Auto-generated method stub
-		input.append("<game>\n");
-		input.append("<teams>\n");
-		input.append("<teama name=\"" + this.teamA.getName() + "\">\n");
-		for (Player p : this.teamA.getPlayers()) {
-			p.outputXML(input);
-		}
-		input.append("</teama>\n");
-		input.append("<teamb name=\"" + this.teamB.getName() + "\">\n");
-		for (Player p : this.teamB.getPlayers()) {
-			p.outputXML(input);
-		}
-		input.append("</teamb>\n");
-		input.append("</teams>\n");
-		input.append("<tossups>\n");
-		for (Tossup t : this.tossups) {
-			t.outputXML(input);
-		}
-		input.append("</tossups>\n");
-		input.append("<tiebreakers>\n");
-		for (Tossup t : this.tiebreakers) {
-			t.outputXML(input);
-		}
-		input.append("</tiebreakers>\n");
-		input.append("</game>\n");
 	}
 }
