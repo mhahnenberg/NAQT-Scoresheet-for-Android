@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" android:orientation="vertical" android:gravity="center_horizontal|clip_vertical">
+    <EditText android:layout_height="wrap_content" android:gravity="center_vertical" android:id="@+id/uploadgameedittext" android:text="@string/blank" android:layout_width="200dip"></EditText>
+    <RadioGroup android:layout_height="wrap_content" android:layout_width="wrap_content" android:orientation="horizontal" android:id="@+id/uploadformatradiogroup">
+        <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:text="@string/xml" android:id="@+id/xmlbutton"></RadioButton>
+        <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/json" android:id="@+id/jsonbutton" android:layout_marginLeft="50dip"></RadioButton>
+    </RadioGroup>
+    <Button android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="@string/uploadgame" android:gravity="center|center_horizontal" android:id="@+id/uploadgamebutton"></Button>
+</LinearLayout>

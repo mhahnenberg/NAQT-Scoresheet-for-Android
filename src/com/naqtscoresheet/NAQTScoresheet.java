@@ -56,23 +56,26 @@ import android.widget.Toast;
 
 public class NAQTScoresheet extends Activity {
 	private static final int MAX_TOSSUPS = 24;
+	public static final int LOAD_GAME_RESULT = 0;
 	private static final int NEW_GAME_DIALOG = 1;
 	private static final int CHOOSE_TEAM_ADD_DIALOG = 2;
-	private static final int CHOOSE_TEAM_A_PLAYER_NAME_DIALOG = 6;
-	private static final int CHOOSE_TEAM_B_PLAYER_NAME_DIALOG = 7;
 	private static final int CHOOSE_TEAM_REMOVE_DIALOG = 3;
 	private static final int CHOOSE_TEAM_A_PLAYERS_DIALOG = 4;
 	private static final int CHOOSE_TEAM_B_PLAYERS_DIALOG = 5;
+	private static final int CHOOSE_TEAM_A_PLAYER_NAME_DIALOG = 6;
+	private static final int CHOOSE_TEAM_B_PLAYER_NAME_DIALOG = 7;
 	private static final int TEAM_A_NAME_DIALOG = 8;
 	private static final int TEAM_B_NAME_DIALOG = 9;
 	private static final int LOAD_GAME_DIALOG = 10;
-	public static final int LOAD_GAME_RESULT = 0;
+	private static final int UPLOAD_GAME_DIALOG = 11;
 	private Game game;
 	public static String teamAName = "Team A";
 	public static String teamBName = "Team B";
 	private boolean modifyingRadioButtons = false;
 	private boolean modifyingCheckBoxes = false;
 	private boolean modifyingSpinner = false;
+	private CharSequence savedExportURL = null;
+	private Object savedExportFormat = null;
 	
 	private void enableBonusBoxes() {
 		modifyingCheckBoxes = true;
@@ -652,6 +655,50 @@ public class NAQTScoresheet extends Activity {
 			});
 			dialog = alertBuilder.create();
 			break;
+		case UPLOAD_GAME_DIALOG:
+			final Dialog uploadGameDialog = new Dialog(NAQTScoresheet.this);
+			dialog = uploadGameDialog;
+			dialog.setContentView(R.layout.upload_game_dialog);
+			dialog.setTitle("Enter Upload URL");
+			dialog.setCancelable(true);
+			if (this.savedExportURL != null) {
+				EditText textbox = (EditText)dialog.findViewById(R.id.uploadgameedittext);
+				textbox.setText(this.savedExportURL);
+			}
+			if (this.savedExportFormat != null) {
+				RadioButton rb;
+				if (this.savedExportFormat == DataExport.Format.XML) {
+					rb = (RadioButton)dialog.findViewById(R.id.xmlbutton);
+				}
+				else {
+					rb = (RadioButton)dialog.findViewById(R.id.jsonbutton);
+				}
+				rb.toggle();
+			}
+			Button uploadGameButton = (Button)dialog.findViewById(R.id.uploadgamebutton);
+			uploadGameButton.setOnClickListener(new OnClickListener() {
+				private Dialog parentDialog = uploadGameDialog;
+				@Override
+				public void onClick(View view) {
+					EditText textbox = (EditText)parentDialog.findViewById(R.id.uploadgameedittext);
+					String remoteURL = textbox.getText().toString();
+					RadioGroup formatGroup = (RadioGroup)parentDialog.findViewById(R.id.uploadformatradiogroup);
+					RadioButton rb = (RadioButton)parentDialog.findViewById(formatGroup.getCheckedRadioButtonId());
+					DataExport.Format format;
+					if (rb.getId() == R.id.xmlbutton) {
+						format = DataExport.Format.XML;
+					}
+					else {
+						format = DataExport.Format.JSON;
+					}
+					NAQTScoresheet.this.savedExportURL = remoteURL;
+					NAQTScoresheet.this.savedExportFormat = format;
+					DataExport.postGameData(getApplicationContext(), NAQTScoresheet.this.game, remoteURL, format);
+					parentDialog.dismiss();
+					NAQTScoresheet.this.removeDialog(UPLOAD_GAME_DIALOG);
+				}
+			});
+			break;
 		default:
 			dialog = null;
 			break;
@@ -727,6 +774,9 @@ public class NAQTScoresheet extends Activity {
     		return true;
     	case R.id.loadgame:
     		showDialog(LOAD_GAME_DIALOG);
+    		return true;
+    	case R.id.upload_game:
+    		showDialog(UPLOAD_GAME_DIALOG);
     		return true;
     	default:
     		return super.onOptionsItemSelected(item);

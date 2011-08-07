@@ -18,7 +18,7 @@ package com.naqtscoresheet;
 import java.io.Serializable;
 import java.util.List;
 
-public class Bonus implements Serializable {
+public class Bonus implements Serializable, Visitable {
 	private static final long serialVersionUID = 2029769330695269039L;
 	private final int points;
 	private final List<Boolean> parts;
@@ -33,5 +33,15 @@ public class Bonus implements Serializable {
 	
 	public boolean isPartCorrect(int partNum) {
 		return this.parts.get(partNum-1);
+	}
+
+	@Override
+	public void accept(Visitor v) {
+		v.visit(this);
+	}
+
+	@Override
+	public void visitChildren(Visitor v) {
+		// no children
 	}
 }

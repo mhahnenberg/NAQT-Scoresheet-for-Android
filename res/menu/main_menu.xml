@@ -11,5 +11,6 @@
     	<item android:id="@+id/stats" android:icon="@android:drawable/ic_menu_sort_by_size" android:title="@string/stats" android:titleCondensed="@string/stats"></item><item android:title="Save Game" android:id="@+id/savegame" android:titleCondensed="Save Game" android:icon="@android:drawable/ic_menu_save"></item>
     	
     	<item android:id="@+id/loadgame" android:title="Load Game" android:titleCondensed="Load Game" android:icon="@drawable/ic_menu_archive"></item>
+    	<item android:id="@+id/upload_game" android:title="Upload" android:titleCondensed="Upload" android:icon="@android:drawable/ic_menu_upload"></item>
 	</group>
 </menu>

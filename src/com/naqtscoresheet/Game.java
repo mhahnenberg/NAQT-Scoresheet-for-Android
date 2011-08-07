@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Game implements Serializable {
+public class Game implements Serializable, Visitable {
 	private static final long serialVersionUID = 4152277972389886782L;
 	private int currTossupNum;
 	private final int maxTossups;
@@ -27,6 +27,7 @@ public class Game implements Serializable {
 	private final List<Tossup> tiebreakers;
 	private final Team teamA;
 	private final Team teamB;
+	private String gameID;
 	
 	public Game(Team teamA, Team teamB, int maxTossups) {
 		this.currTossupNum = 1;
@@ -35,8 +36,19 @@ public class Game implements Serializable {
 		this.tiebreakers = new ArrayList<Tossup>();
 		this.teamA = teamA;
 		this.teamB = teamB;
+		this.gameID = null;
 		
-		this.tossups.add(new Tossup(1, this.teamA, 0, this.teamB, 0, false));
+		this.tossups.add(new Tossup(1, false));
+	}
+	
+	public String getGameID() {
+		return this.gameID;
+	}
+	
+	public void setGameID(String id) {
+		if (this.gameID != null)
+			return;
+		this.gameID = id;
 	}
 	
 	public Team getTeamA() {
@@ -51,14 +63,14 @@ public class Game implements Serializable {
 		if (this.currTossupNum + 1 <= maxTossups) {
 			this.currTossupNum += 1;
 			if (this.tossups.size() < this.currTossupNum) {
-				this.tossups.add(new Tossup(this.currTossupNum, this.teamA, 0, this.teamB, 0, false));
+				this.tossups.add(new Tossup(this.currTossupNum, false));
 			}
 			return this.tossups.get(currTossupNum-1);
 		}
 		else {
 			this.currTossupNum += 1;
 			if (this.tiebreakers.size() < this.currTossupNum - this.maxTossups) {
-				this.tiebreakers.add(new Tossup(this.currTossupNum, this.teamA, 0, this.teamB, 0, true));
+				this.tiebreakers.add(new Tossup(this.currTossupNum, true));
 			}
 			return this.tiebreakers.get(this.currTossupNum - this.maxTossups - 1);
 		}
@@ -160,6 +172,23 @@ public class Game implements Serializable {
 		}
 		else {
 			return this.tossups.size() + this.tiebreakers.size() - 1;
+		}
+	}
+	
+	@Override
+	public void accept(Visitor v) {
+		v.visit(this);
+	}
+	
+	@Override
+	public void visitChildren(Visitor v) {
+		this.teamA.accept(v);
+		this.teamB.accept(v);
+		for (Tossup t : this.tossups) {
+			t.accept(v);
+		}
+		for (Tossup t : this.tiebreakers) {
+			t.accept(v);
 		}
 	}
 }

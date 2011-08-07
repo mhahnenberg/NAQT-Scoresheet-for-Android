@@ -17,7 +17,7 @@ package com.naqtscoresheet;
 
 import java.io.Serializable;
 
-public class Player implements Serializable {
+public class Player implements Serializable, Visitable {
 	private static final long serialVersionUID = -1191776898623429448L;
 	private final String name;
 	public Player(String name) {
@@ -38,5 +38,15 @@ public class Player implements Serializable {
 	
 	public String toString() {
 		return this.name;
+	}
+
+	@Override
+	public void accept(Visitor v) {
+		v.visit(this);
+	}
+
+	@Override
+	public void visitChildren(Visitor v) {
+		// no children
 	}
 }

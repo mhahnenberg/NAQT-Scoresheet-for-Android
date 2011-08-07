@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Team implements Serializable {
+public class Team implements Serializable, Visitable {
 	private static final long serialVersionUID = 6446404867455448712L;
 	private String name;
 	private int score;
@@ -54,6 +54,10 @@ public class Team implements Serializable {
 		return this.score;
 	}
 	
+	public boolean isBogus() {
+		return false;
+	}
+	
 	public boolean equals(Object o) {
 		if (!(o instanceof Team)) {
 			return false;
@@ -85,5 +89,17 @@ public class Team implements Serializable {
 	
 	public String toString() {
 		return this.name;
+	}
+
+	@Override
+	public void accept(Visitor v) {
+		v.visit(this);
+	}
+
+	@Override
+	public void visitChildren(Visitor v) {
+		for (Player p : this.allPlayers) {
+			p.accept(v);
+		}
 	}
 }

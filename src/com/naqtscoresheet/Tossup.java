@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Tossup implements Serializable {
+public class Tossup implements Serializable, Visitable {
 	private static final long serialVersionUID = -7974143477552157831L;
 	private final int winnerPoints;
 	private final int loserPoints;
@@ -42,6 +42,28 @@ public class Tossup implements Serializable {
 		public BogusPlayer(String name) {
 			super(name);
 		}
+	}
+	
+	private static class BogusTeam extends Team {
+		private static final long serialVersionUID = 1765247653339353918L;
+
+		public BogusTeam(String name) {
+			super(name);
+		}
+		
+		@Override
+		public boolean equals(Object o) {
+			return false;
+		}
+		
+		@Override
+		public boolean isBogus() {
+			return true;
+		}
+	}
+	
+	public Tossup(int tossupNum, boolean isTiebreaker) {
+		this(tossupNum, new BogusTeam(""), 0, new BogusTeam(""), 0, isTiebreaker);
 	}
 
 	public Tossup(int tossupNum, Team winnerTeam, int winnerPoints, Team loserTeam, int loserPoints, boolean isTiebreaker) {
@@ -156,5 +178,15 @@ public class Tossup implements Serializable {
 	
 	public boolean isTiebreaker() {
 		return this.isTiebreaker;
+	}
+
+	@Override
+	public void accept(Visitor v) {
+		v.visit(this);
+	}
+
+	@Override
+	public void visitChildren(Visitor v) {
+		this.bonus.accept(v);
 	}
 }

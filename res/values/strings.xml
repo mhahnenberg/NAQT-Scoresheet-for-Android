@@ -35,4 +35,7 @@
     <string name="points">Points</string>
     <string name="ppg">PPG</string>
     <string name="tens">10s</string>
+    <string name="uploadgame">Upload Game</string>
+    <string name="xml">XML</string>
+    <string name="json">JSON</string>
 </resources>
