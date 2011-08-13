@@ -43,7 +43,7 @@ public class DataExport {
 		}
 		
 	    HttpClient httpclient = new DefaultHttpClient();
-	    HttpPost httppost = new HttpPost("http://192.168.1.142:8080/beacon");
+	    HttpPost httppost = new HttpPost(url);
 
 	    try {
 	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
