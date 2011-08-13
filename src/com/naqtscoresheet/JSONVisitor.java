@@ -37,6 +37,7 @@ public class JSONVisitor implements Visitor {
 		}
 		
 		try {
+			this.game.put("type", "game");
 			this.game.put("teams", teams);
 			this.game.put("tossups", tossups);
 			if (g.getGameID() != null) {
@@ -76,12 +77,15 @@ public class JSONVisitor implements Visitor {
 		}
 
 		try {
+			winnerTeam.put("type", "tossup-team");
 			winnerTeam.put("players", winnerPlayers);
 			winnerTeam.put("points", t.getWinnerPoints());
 			
+			loserTeam.put("type", "tossup-team");
 			loserTeam.put("players", loserPlayers);
 			loserTeam.put("points", t.getLoserPoints());
 			
+			tossup.put("type", "tossup");
 			tossup.put("bonus", bonus);
 			tossup.put("winner_team", winnerTeam);
 			tossup.put("loser_team", loserTeam);
@@ -96,6 +100,7 @@ public class JSONVisitor implements Visitor {
 	public void visit(Bonus b) {
 		JSONObject bonus = new JSONObject();
 		try {
+			bonus.put("type", "bonus");
 			bonus.put("points", b.getPoints());
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -107,6 +112,7 @@ public class JSONVisitor implements Visitor {
 	public void visit(Player p) {
 		JSONObject player = new JSONObject();
 		try {
+			player.put("type", "player");
 			player.put("name", p.getName());
 			if (this.winnerPlayer) {
 				player.put("winner", true);
@@ -132,6 +138,7 @@ public class JSONVisitor implements Visitor {
 		}
 		
 		try {
+			team.put("type", "game-team");
 			team.put("name", t.getName());
 			team.put("players", players);
 		} catch (JSONException e) {
